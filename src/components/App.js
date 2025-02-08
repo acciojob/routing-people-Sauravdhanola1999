@@ -1,13 +1,31 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ProductList from './ProductList';
+import ProductDetails from './ProductDetails';
+import AdminPanel from './AdminPanel';
+import Header from './Header';
+import Footer from './Footer';
 
-import React from "react";
-import './../styles/App.css';
-
-const App = () => {
+function App() {
   return (
-    <div>
-        {/* Do not remove the main div */}
-    </div>
-  )
+    <Router>
+      <Header />
+      <main style={styles.main}>
+        <Routes>
+          <Route path="/" element={<ProductList />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/admin" element={<AdminPanel />} />
+        </Routes>
+      </main>
+      <Footer />
+    </Router>
+  );
 }
 
-export default App
+const styles = {
+  main: {
+    minHeight: 'calc(100vh - 80px)', // to ensure footer is at the bottom
+  },
+};
+
+export default App;
